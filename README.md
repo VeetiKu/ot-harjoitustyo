@@ -8,4 +8,8 @@ Laskarit löytyvät kansiosta [laskarit](./laskarit).
 
 ## Sovelluksen Vaatimusmäärittely
 
-Vaatimus määrittely löytyy [täältä](./dokumentaatio/vaatimusmaarittely.md)
+Vaatimus määrittely löytyy [täältä](./dokumentaatio/vaatimusmaarittely.md).
+
+## Tuntikirjanpito
+
+Tuntikirjanpito löytyy [täältä](./dokumentaatio/tuntikirjanpito.md)
