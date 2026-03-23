@@ -5,3 +5,7 @@ Tässä harjoitustyössä toteutan **ohjelmistosovelluksen**, jossa sovellan kur
 ## Laskarit
 
 Laskarit löytyvät kansiosta [laskarit](./laskarit).
+
+## Sovelluksen Vaatimusmäärittely
+
+Vaatimus määrittely löytyy [täältä](./dokumentaatio/vaatimusmaarittely.md)
