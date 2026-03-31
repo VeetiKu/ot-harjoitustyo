@@ -13,3 +13,8 @@ Vaatimus määrittely löytyy [täältä](./dokumentaatio/vaatimusmaarittely.md)
 ## Tuntikirjanpito
 
 Tuntikirjanpito löytyy [täältä](./dokumentaatio/tuntikirjanpito.md)
+
+## Changelog
+
+Changelog löytyy [täältä](./dokumentaatio/changelog.md)
+
