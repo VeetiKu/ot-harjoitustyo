@@ -3,3 +3,5 @@ __pycache__
 .coverage
 htmlcov
 .vscode
+.pylintrc
+__pycache__/

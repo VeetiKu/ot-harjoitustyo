@@ -1,6 +1,6 @@
-from services import Authentication
-from entities import User, Expense
-
+from services.authentication import Authentication
+from services.expenseservice import ExpenseService
+from entities import Expense
 
 def main():
 
@@ -22,7 +22,7 @@ def main():
             try:
                 user = auth.login(username, password)
                 print(f"Welcome, {user.username}!")
-                dashboard()
+                dashboard(user)
             except ValueError as e:
                 print(f"Error: {e}")
 
@@ -40,58 +40,70 @@ def main():
             print("Exiting the app")
             break
 
-def dashboard():
-    
-    while True:
-        print("\n1 - Set Budget")
-        print("2 - Delete Expense")
-        print("3 - Add Expense")
-        print("4 - Remove Expense")
-        print("5 - Delete Expense")
-        print("6 - Logout")
-        print("0 - Exit")
-            
-        choice = int(input("What would you like to do?"))
-        
-        if choice not in range(0, 6):
-            print("Entered Number must be between 0-5")
-            continue
-        
-        elif choice == "1":
-            total = 0
-            for i in User.expenses:
-                print(f"{i.name} - {i.price} ({i.category})")
-                total += i.price
+def dashboard(user):
+    expense_service = ExpenseService()
 
-            print(f"Total spent: {total}")
-            print(f"Budget left: {User.budget - total}")
-            
-        if choice == "2":
+    while True:
+        print("\n1 - Overview")
+        print("2 - Set Budget")
+        print("3 - Add Expense")
+        print("4 - Delete Expense")
+        print("0 - Logout")
+
+        choice = int(input("What would you like to do?"))
+
+        if choice not in range(0, 5):
+            print("Entered Number must be between 0-4")
+            continue
+
+        if choice == 1:
+            expenses = expense_service.get_expenses(user)
+
+
+            if not expenses:
+                print("No expenses yet.")
+            else:
+                for i in expenses:
+                    print(f"{i.name} - {i.price} ({i.category})")
+
+            print(f"Total spent: {expense_service.get_total(user)}")
+            print(f"Budget left: {expense_service.get_budget_left(user)}")
+
+        elif choice == 2:
             budget = float(input("Enter monthly budget: "))
-            User.budget = budget
+            user.budget = budget
             print("Budget updated!")
-            
-        elif choice == "3":
+
+        elif choice == 3:
             name = input("Expense name: ")
             price = float(input("Price: "))
             category = input("Category: ")
-            date = input("Date (YYYY-MM-DD): ")
 
-            expense = Expense(name, price, category, date)
-            User.expenses.append(expense)
+            expense = Expense(name, price, category)
+            expense_service.add_expense(user, expense)
 
             print("Expense added!")
-            
-        elif choice == "4":
-            for i, j in enumerate(User.expenses):
-                print(f"{i} -{j.name} ({j.price})")
-            index = int(input("Select the index you want to delete"))
-            User.expenses.pop(index)
-            
-        elif choice == "5":
+
+        elif choice == 4:
+            expenses = expense_service.get_expenses(user)
+
+            if not expenses:
+                print("No expenses to delete.")
+                continue
+
+            for i, j in enumerate(expenses):
+                print(f"{i} - {j.name} ({j.price})")
+            index = int(input("Select the index you want to delete: "))
+
+            if expense_service.delete_expense(user, index):
+                print("Expense deleted!")
+            else:
+                print("Invalid index")
+
+        elif choice == 0:
             print("Logging out...")
             break
-    
-    
+
+
 if __name__ == "__main__":
     main()

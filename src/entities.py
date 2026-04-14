@@ -6,8 +6,7 @@ class User:
         self.expenses = []
 
 class Expense:
-    def __init__(self, name, price, category, date):
+    def __init__(self, name, price, category):
         self.name = name
         self.price = price
         self.category = category
-        self.date = date

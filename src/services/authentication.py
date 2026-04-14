@@ -1,6 +1,5 @@
 from entities import User
 
-
 class Authentication:
     def __init__(self):
         self.users = []

@@ -1,5 +1,5 @@
 import unittest
-from services import Authentication
+from services.authentication import Authentication
 
 
 class TestAuthentication(unittest.TestCase):

@@ -2,9 +2,22 @@
 
 Tässä harjoitustyössä toteutan **ohjelmistosovelluksen**, jossa sovellan kurssilla opittuja *ohjelmistotekniikan periaatteita*.
 
-## Laskarit
+## Sovelluksen Asennus
 
-Laskarit löytyvät kansiosta [laskarit](./laskarit).
+1. **Kloonaa repositorio**
+```bash
+git clone <repository-url>
+```
+
+2. **Asenna Riippuvuudet**
+```bash
+poetry install
+```
+
+3 **Käynnistä sovellus**
+```bash
+poetry run invoke start
+```
 
 ## Sovelluksen Vaatimusmäärittely
 
