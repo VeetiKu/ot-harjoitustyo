@@ -33,5 +33,5 @@ Changelog löytyy [täältä](./dokumentaatio/changelog.md)
 
 ## Arkkitehtuuri
 
-Arkkitehtuurig löytyy [täältä](./dokumentaatio/arkkitehtuuri.md)
+Arkkitehtuuri löytyy [täältä](./dokumentaatio/arkkitehtuuri.md)
 
