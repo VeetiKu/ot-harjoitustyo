@@ -31,3 +31,7 @@ Tuntikirjanpito löytyy [täältä](./dokumentaatio/tuntikirjanpito.md)
 
 Changelog löytyy [täältä](./dokumentaatio/changelog.md)
 
+## Arkkitehtuuri
+
+Arkkitehtuurig löytyy [täältä](./dokumentaatio/arkkitehtuuri.md)
+
