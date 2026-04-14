@@ -2,3 +2,12 @@ class User:
     def __init__(self, username, password):
         self.username = username
         self.password = password
+        self.budget = 0
+        self.expenses = []
+
+class Expense:
+    def __init__(self, name, price, category, date):
+        self.name = name
+        self.price = price
+        self.category = category
+        self.date = date
