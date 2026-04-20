@@ -41,8 +41,17 @@ class TestExpenseService(unittest.TestCase):
         self.service.add_expense(self.user, expense)
         self.assertEqual(len(self.service.get_expenses(self.user)), 1)
     
+    def test_edit_expense(self):
+        expense = Expense("Shoes", 50, "Clothing")
+        self.service.add_expense(self.user, expense)
+        expense2 = Expense("Chicken", 5, "Food")
+        self.service.edit_expense(self.user, 0, expense2)
+        self.assertEqual(self.user.expenses[0].name, "Chicken")
+        self.assertEqual(self.user.expenses[0].price, 5)
         
-        
+    def test_set_budget(self):
+        self.service.set_budget(self.user, 200)
+        self.assertEqual(self.user.budget, 200)
         
         
         

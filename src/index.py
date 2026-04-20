@@ -2,6 +2,7 @@ from services.authentication import Authentication
 from services.expenseservice import ExpenseService
 from entities import Expense
 
+
 def main():
 
     auth = Authentication()
@@ -48,12 +49,13 @@ def dashboard(user):
         print("2 - Set Budget")
         print("3 - Add Expense")
         print("4 - Delete Expense")
+        print("5 - Edit Expense")
         print("0 - Logout")
 
         choice = int(input("What would you like to do?"))
 
-        if choice not in range(0, 5):
-            print("Entered Number must be between 0-4")
+        if choice not in range(0, 6):
+            print("Entered Number must be between 0-5")
             continue
 
         if choice == 1:
@@ -70,9 +72,9 @@ def dashboard(user):
             print(f"Budget left: {expense_service.get_budget_left(user)}")
 
         elif choice == 2:
-            budget = float(input("Enter monthly budget: "))
-            user.budget = budget
-            print("Budget updated!")
+            amount = float(input("Set your budget: "))
+            expense_service.set_budget(user, amount)
+            print(f"Budget set to {amount}€")
 
         elif choice == 3:
             name = input("Expense name: ")
@@ -99,6 +101,30 @@ def dashboard(user):
                 print("Expense deleted!")
             else:
                 print("Invalid index")
+        elif choice == 5:
+            expenses = expense_service.get_expenses(user)
+
+            if not expenses:
+                print("No expenses to edit.")
+                continue
+
+            for i, j in enumerate(expenses):
+                print(f"{i} - {j.name} ({j.price})")
+            index = int(input("Select the index you want to edit: "))
+
+            if 0 <= index < len(expenses):
+                name = input("New Expense name: ")
+                price = float(input("New Price: "))
+                category = input("New Category: ")
+
+                new_expense = Expense(name, price, category)
+                if expense_service.edit_expense(user, index, new_expense):
+                    print("Expense updated!")
+                else:
+                    print("Failed to update expense.")
+            else:
+                print("Invalid index")
+                
 
         elif choice == 0:
             print("Logging out...")
