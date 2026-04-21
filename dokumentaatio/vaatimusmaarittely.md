@@ -58,12 +58,16 @@ COMPLETED
 
 ### Recurring Expenses
 - The user can define recurring monthly expenses  
-- Recurring expenses are automatically added each month  
+- Recurring expenses are automatically added each month 
+
+COMPLETED
 
 ### Edit Expenses
 - The user can edit:
   - One-time expenses  
   - Recurring expenses  
+
+COMPLETED
 
 ### Delete Expenses
 - The user can delete an expense from the current month  

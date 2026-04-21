@@ -14,3 +14,10 @@
 - Added expense functionality to the command line interface
 - Implemented setting and updating monthly budget
 - Added tests for `ExpenseService`
+
+## Week 5
+
+- Add recurring expense and expense editing functionality
+- Add additional tests for recurring and edit expenses
+- Refactored the interface by putting the logic into seperate functions
+- Improved input validation

@@ -7,8 +7,17 @@
 |     14.4 |   1  |      Created Expenseservice and moved logic from dashboard function to the Expenseservice     |
 |     14.4 |   4   |      Unittests for ExpenseService class     |
 |     14.4 |   1   |      Improved code quality using pylint suggestions     |
+|     20.4 |   3  |      Ability to edit already created expenses      |
+|     20.4 |   5   |     Ability to set an expense as recurring so that it automatically adds it every month      |
+|     21.4 |   2   |     Automated tests for edit and recurring expense      |
+|     21.4 |   1   |      Refactored index.py to get rid of pylint errors     |
 |      |      |           |
 |      |      |           |
 |      |      |           |
 |      |      |           |
-|**total**     |   *17**   |           |
+|      |      |           |
+|      |      |           |
+|      |      |           |
+|      |      |           |
+|      |      |           |
+|**total**     |   *28**   |           |

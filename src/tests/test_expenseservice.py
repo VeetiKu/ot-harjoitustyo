@@ -1,6 +1,7 @@
 import unittest
 from services.expenseservice import ExpenseService
 from entities import User, Expense
+from datetime import datetime, timedelta
 
 class TestExpenseService(unittest.TestCase):
     def setUp(self):
@@ -48,11 +49,20 @@ class TestExpenseService(unittest.TestCase):
         self.service.edit_expense(self.user, 0, expense2)
         self.assertEqual(self.user.expenses[0].name, "Chicken")
         self.assertEqual(self.user.expenses[0].price, 5)
-        
+
     def test_set_budget(self):
         self.service.set_budget(self.user, 200)
         self.assertEqual(self.user.budget, 200)
-        
+
+    def test_track_recurring_expenses(self):
+        expense = Expense("Shoes", 50, "Clothing", recurring=True)
+        self.service.add_expense(self.user, expense)
+        expense.last_applied = datetime.now() - timedelta(days=30)
+        self.service.track_recurring_expenses(self.user)
+        self.assertEqual(len(self.user.expenses), 2)
+        self.assertEqual(self.user.expenses[0].name, "Shoes")
+        self.assertEqual(self.user.expenses[1].name, "Shoes")
+
         
         
         

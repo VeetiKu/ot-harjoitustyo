@@ -17,5 +17,3 @@ class Expense:
             self.last_applied = last_applied or datetime.now()
         else:
             self.last_applied = None
-        
-    

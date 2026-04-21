@@ -1,6 +1,6 @@
-# Ohjelmistotekniikka, harjoitustyö
+# kulujenhallintasovellus
 
-Tässä harjoitustyössä toteutan **ohjelmistosovelluksen**, jossa sovellan kurssilla opittuja *ohjelmistotekniikan periaatteita*.
+Sovellus on kulujenhallintasovellus, jonka avulla käyttäjä voi lisätä, muokata ja poistaa kulujaan sekä asettaa ja seurata budjettiaan. Sovellus auttaa käyttäjää hahmottamaan omaa rahankäyttöään ja pitämään menot hallinnassa.
 
 ## Sovelluksen Asennus
 
