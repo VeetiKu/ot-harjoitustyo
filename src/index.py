@@ -1,11 +1,12 @@
 from services.authentication import Authentication
 from services.expenseservice import ExpenseService
 from entities import Expense
-
+from database import initialize_database
 
 def main():
-
+    initialize_database()
     auth = Authentication()
+    
     while True:
         print("\n1 - Login")
         print("2 - Register")
@@ -41,7 +42,7 @@ def login(auth):
     password = input("Password:")
     try:
         user = auth.login(username, password)
-        print(f"Welcome, {user.username}!")
+        print(f"Welcome, {user['username']}!")
         dashboard(user)
     except ValueError as e:
         print(f"Error: {e}")
@@ -113,7 +114,7 @@ def add_expense(user, expense_service):
         print("Invalid input enter (y/n)")
         return
 
-    expense = Expense(name, price, category, recurring)
+    expense = Expense(id=None, name=name, price=price, category=category, recurring=recurring)
     expense_service.add_expense(user, expense)
     print("Expense added!")
 
@@ -157,7 +158,7 @@ def edit_expense(user, expense_service):
             print("Invalid input enter (y/n)")
             return
 
-        new_expense = Expense(name, price, category, recurring)
+        new_expense = Expense(id=None, name=name, price=price, category=category, recurring=recurring)
         if expense_service.edit_expense(user, index, new_expense):
             print("Expense updated!")
         else:

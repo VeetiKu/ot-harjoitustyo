@@ -8,7 +8,8 @@ class User:
         self.expenses = []
 
 class Expense:
-    def __init__(self, name, price, category, recurring=False, last_applied=None):
+    def __init__(self, id, name, price, category, recurring=False, last_applied=None):
+        self.id = id
         self.name = name
         self.price = price
         self.category = category

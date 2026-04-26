@@ -5,3 +5,4 @@ htmlcov
 .vscode
 .pylintrc
 __pycache__/
+expenses.db
