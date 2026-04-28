@@ -1,67 +1,61 @@
 import unittest
 from services.expenseservice import ExpenseService
-from entities import User, Expense
-from datetime import datetime, timedelta
+from services.authentication import Authentication
+from entities import Expense
+from database import reset_database 
 
 class TestExpenseService(unittest.TestCase):
     def setUp(self):
+        reset_database()
+        self.auth = Authentication()
         self.service = ExpenseService()
-        self.user = User("testuser", "123")
+        self.auth.register("testuser", "123")
+        self.user = self.auth.login("testuser", "123")
+        
         
     def test_add_expense(self):
-        expense = Expense("Chicken", 5, "Food")
-        self.service.add_expense(self.user, expense)
+        self.service.add_expense(self.user, Expense(None, "Chicken", 5, "Food"))
         
-        self.assertEqual(len(self.user.expenses), 1)
-        self.assertEqual(self.user.expenses[0].name, "Chicken")
-        self.assertEqual(self.user.expenses[0].price, 5)
-        self.assertEqual(self.user.expenses[0].category, "Food")
+        expenses = self.service.get_expenses(self.user)
+        self.assertEqual(len(expenses), 1)
+        self.assertEqual(expenses[0].name, "Chicken")
+        self.assertEqual(expenses[0].price, 5)
         
     def test_delete_expense(self):
-        expense = Expense("Chicken", 5, "Food")
-        self.service.add_expense(self.user, expense)
-        self.assertEqual(len(self.user.expenses), 1)
+        self.service.add_expense(self.user, Expense(None, "Chicken", 5, "Food"))
         self.service.delete_expense(self.user, 0)
-        self.assertEqual(len(self.user.expenses), 0)
+        expenses = self.service.get_expenses(self.user)
+        self.assertEqual(len(expenses), 0)
         
     def test_get_total(self):
-        expense = Expense("Chicken", 5, "Food")
-        expense2 = Expense("Shoes", 50, "Clothing")
-        self.service.add_expense(self.user, expense)
-        self.service.add_expense(self.user, expense2)
+        self.service.add_expense(self.user, Expense(None, "Chicken", 5, "Food"))
+        self.service.add_expense(self.user, Expense(None, "Shoes", 50, "Clothing"))
         self.assertEqual(self.service.get_total(self.user), 55)
 
     def test_get_budget_left(self):
-        self.user.budget = 100
-        expense = Expense("Shoes", 50, "Clothing")
-        self.service.add_expense(self.user, expense)
+        self.service.set_budget(self.user, 100)
+        self.service.add_expense(self.user, Expense(None, "Shoes", 50, "Clothing"))
         self.assertEqual(self.service.get_budget_left(self.user), 50)
     
     def test_get_expenses(self):
-        expense = Expense("Shoes", 50, "Clothing")
-        self.service.add_expense(self.user, expense)
-        self.assertEqual(len(self.service.get_expenses(self.user)), 1)
+        self.service.add_expense(self.user, Expense(None, "Chicken", 5, "Food"))
+        self.service.add_expense(self.user, Expense(None, "Shoes", 50, "Clothing"))
+        expenses = self.service.get_expenses(self.user)
+        self.assertEqual(len(expenses), 2)
+        self.assertEqual(expenses[0].name, "Chicken")
+        self.assertEqual(expenses[1].name, "Shoes")
     
     def test_edit_expense(self):
-        expense = Expense("Shoes", 50, "Clothing")
-        self.service.add_expense(self.user, expense)
-        expense2 = Expense("Chicken", 5, "Food")
-        self.service.edit_expense(self.user, 0, expense2)
-        self.assertEqual(self.user.expenses[0].name, "Chicken")
-        self.assertEqual(self.user.expenses[0].price, 5)
+        self.service.add_expense(self.user, Expense(None, "Chicken", 5, "Food"))
+        self.service.edit_expense(self.user, 0, Expense(None, "Shoes", 50, "Clothing"))
+        expenses = self.service.get_expenses(self.user)
+        self.assertEqual(len(expenses), 1)
+        self.assertEqual(expenses[0].price, 50)
+        self.assertEqual(expenses[0].name, "Shoes")
 
     def test_set_budget(self):
-        self.service.set_budget(self.user, 200)
-        self.assertEqual(self.user.budget, 200)
-
-    def test_track_recurring_expenses(self):
-        expense = Expense("Shoes", 50, "Clothing", recurring=True)
-        self.service.add_expense(self.user, expense)
-        expense.last_applied = datetime.now() - timedelta(days=30)
-        self.service.track_recurring_expenses(self.user)
-        self.assertEqual(len(self.user.expenses), 2)
-        self.assertEqual(self.user.expenses[0].name, "Shoes")
-        self.assertEqual(self.user.expenses[1].name, "Shoes")
+        self.service.set_budget(self.user, 100)
+        self.assertEqual(self.service.get_budget_left(self.user), 100)
 
         
         

@@ -4,9 +4,14 @@ from entities import Expense
 from database import initialize_database
 
 def main():
+
+    """Main function that runs the application. It initializes the database, 
+    creates an instance of the Authentication class and shows the main menu 
+    where the user can choose to login, register or exit the app."""
+
     initialize_database()
     auth = Authentication()
-    
+
     while True:
         print("\n1 - Login")
         print("2 - Register")
@@ -28,6 +33,10 @@ def main():
             print("Entered Number must be between 0-2")
 
 def register(auth):
+    """Handles the user registration process. It prompts the user for a username and password,
+    and tries to register the user using the Authentication class. If registration is successful, 
+    it prints a success message. If there is an error it prints the error message."""
+
     username = input("Choose a Username:")
     password = input("Choose a Password:")
 
@@ -38,6 +47,11 @@ def register(auth):
         print(f"Error: {e}")
 
 def login(auth):
+    """Handles the user login process. It prompts the user for a username and password, 
+    and tries to login the user using the Authentication class.
+    If login is successful, it prints a welcome message.
+    If there is an error it prints the error message."""
+
     username = input("Username:")
     password = input("Password:")
     try:
@@ -48,6 +62,9 @@ def login(auth):
         print(f"Error: {e}")
 
 def dashboard(user):
+    """Shows the dashboard menu where the user can choose 
+    to view an overview of their expenses, set a budget, add an expense,
+    delete an expense, edit an expense or logout."""
     expense_service = ExpenseService()
 
 
@@ -84,6 +101,7 @@ def dashboard(user):
 
 
 def overview(user, expense_service):
+    """Shows an overview of the user's expenses."""
     expenses = expense_service.get_expenses(user)
 
     if not expenses:
@@ -96,11 +114,15 @@ def overview(user, expense_service):
         print(f"Budget left: {expense_service.get_budget_left(user)}")
 
 def set_budget(user, expense_service):
+    """Handles the process of setting a budget for the user.
+    It prompts the user for a budget amount and sets it using the ExpenseService class."""
     amount = float(input("Set your budget: "))
     expense_service.set_budget(user, amount)
     print(f"Budget set to {amount}€")
 
 def add_expense(user, expense_service):
+    """Handles the process of adding a new expense for the user. 
+    It prompts the user for the expense details and adds the expense."""
     name = input("Expense name: ")
     price = float(input("Price: "))
     category = input("Category: ")
@@ -114,11 +136,15 @@ def add_expense(user, expense_service):
         print("Invalid input enter (y/n)")
         return
 
-    expense = Expense(id=None, name=name, price=price, category=category, recurring=recurring)
+    expense = Expense(expense_id=None, name=name,
+    price=price, category=category, recurring=recurring)
     expense_service.add_expense(user, expense)
     print("Expense added!")
 
 def delete_expense(user, expense_service):
+    """Handles the process of deleting an expense for the user. 
+    It shows a list of the user expenses and prompts to select which expense to delete. 
+    It then deletes the selected expense using the ExpenseService class."""
     expenses = expense_service.get_expenses(user)
 
     if not expenses:
@@ -135,6 +161,10 @@ def delete_expense(user, expense_service):
         print("Invalid index")
 
 def edit_expense(user, expense_service):
+    """Handles the process of editing an expense for the user. 
+    It shows a list of the users expenses and prompts the user to select which expense to edit. 
+    It then asks the user for the new expense details and updates the selected expense"""
+
     expenses = expense_service.get_expenses(user)
 
     if not expenses:
@@ -158,7 +188,9 @@ def edit_expense(user, expense_service):
             print("Invalid input enter (y/n)")
             return
 
-        new_expense = Expense(id=None, name=name, price=price, category=category, recurring=recurring)
+        new_expense = Expense(expense_id=None, name=name, price=price,
+        category=category, recurring=recurring)
+
         if expense_service.edit_expense(user, index, new_expense):
             print("Expense updated!")
         else:

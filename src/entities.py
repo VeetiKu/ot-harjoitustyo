@@ -1,6 +1,7 @@
 from datetime import datetime
 
 class User:
+    """Class that represents a user in the system."""
     def __init__(self, username, password):
         self.username = username
         self.password = password
@@ -8,8 +9,9 @@ class User:
         self.expenses = []
 
 class Expense:
-    def __init__(self, id, name, price, category, recurring=False, last_applied=None):
-        self.id = id
+    """Class that represents an expense in the system."""
+    def __init__(self, expense_id, name, price, category, recurring=False, last_applied=None):
+        self.id = expense_id
         self.name = name
         self.price = price
         self.category = category

@@ -1,15 +1,17 @@
 import unittest
 from services.authentication import Authentication
+from database import reset_database
 
 
 class TestAuthentication(unittest.TestCase):
     def setUp(self):
+        reset_database()
         self.auth = Authentication()
 
     def test_register_creates_user(self):
         self.auth.register("testuser", "123")
-        self.assertEqual(len(self.auth.users), 1)
-        self.assertEqual(self.auth.users[0].username, "testuser")
+        user =self.auth.login("testuser", "123")
+        self.assertEqual(user['username'], "testuser")
 
     def test_register_gives_valueerror_when_short_username(self):
         with self.assertRaises(ValueError):
@@ -23,7 +25,7 @@ class TestAuthentication(unittest.TestCase):
     def test_login_works(self):
         self.auth.register("testuser", "123")
         user = self.auth.login("testuser", "123")
-        self.assertEqual(user.username, "testuser")
+        self.assertEqual(user['username'], "testuser")
 
     def test_login_fails_with_wrong_username(self):
         self.auth.register("testuser", "123")

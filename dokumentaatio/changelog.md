@@ -21,3 +21,10 @@
 - Add additional tests for recurring and edit expenses
 - Refactored the interface by putting the logic into seperate functions
 - Improved input validation
+
+## Week 6
+- Integrated SQLite database to enable persistent data storage  
+- Refactored application logic to use the database instead of in-memory data  
+- Rebuilt automated tests to work with the database  
+- Improved code quality by fixing pylint warnings and errors  
+- Added usage instructions and a preliminary architecture description to the documentation  

@@ -19,9 +19,33 @@ poetry install
 poetry run invoke start
 ```
 
+## Komentorivi
+
+### Automaatiset testit voi suoritaa komenolla
+
+```bash
+poetry run invoke test
+```
+
+### Testi kattavuuden saa suoritettua komenolla
+
+```bash
+poetry run invoke coverage_report
+```
+
+### Pylintin koodin laatu tarkistukset saa suoritettua komenolla
+
+```bash
+poetry run invoke lint
+```
+
 ## Sovelluksen Vaatimusmäärittely
 
 Vaatimus määrittely löytyy [täältä](./dokumentaatio/vaatimusmaarittely.md).
+
+## Sovelluksen Ohjeet
+
+Sovelluksen Ohjeet löytyy [täältä](./dokumentaatio/instructions.md)
 
 ## Tuntikirjanpito
 
@@ -34,4 +58,8 @@ Changelog löytyy [täältä](./dokumentaatio/changelog.md)
 ## Arkkitehtuuri
 
 Arkkitehtuuri löytyy [täältä](./dokumentaatio/arkkitehtuuri.md)
+
+## Julakisut
+
+Sovelluksen julkaisut löytyy [täältä](https://github.com/VeetiKu/ot-harjoitustyo/releases)
 

@@ -11,13 +11,13 @@
 |     20.4 |   5   |     Ability to set an expense as recurring so that it automatically adds it every month      |
 |     21.4 |   2   |     Automated tests for edit and recurring expense      |
 |     21.4 |   1   |      Refactored index.py to get rid of pylint errors     |
+|     26.4|    6  |       Added Database to allow for saving of data and converted all app logic to use the database  |
+|     27.4|    3  |      Rebuilt the existing automated tests to work with the Database     |
+|     28.4|    1  |      Improved Code Quality by fixing pylint errors     |
+|     28.4|    2  |       Added instructions and a prelimenary architeture description to the app documentation    |
+|         |      |           |
 |      |      |           |
 |      |      |           |
 |      |      |           |
 |      |      |           |
-|      |      |           |
-|      |      |           |
-|      |      |           |
-|      |      |           |
-|      |      |           |
-|**total**     |   *28**   |           |
+|**total**     |   *40*   |           |
