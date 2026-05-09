@@ -15,9 +15,9 @@
 |     27.4|    3  |      Rebuilt the existing automated tests to work with the Database     |
 |     28.4|    1  |      Improved Code Quality by fixing pylint errors     |
 |     28.4|    2  |       Added instructions and a prelimenary architeture description to the app documentation    |
-|         |      |           |
+|     5.5   |  5    |      Updated the UI from CLI to Graphical     |
+|     6.5 |    3  |        Added expenses filtered by month when month changes the old months expenses are archivied   |
+|     9.5|     3 |         Updated project documentation to be up to date  |
 |      |      |           |
 |      |      |           |
-|      |      |           |
-|      |      |           |
-|**total**     |   *40*   |           |
+|**total**     |   *51*   |           |

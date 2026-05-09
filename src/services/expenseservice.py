@@ -3,7 +3,6 @@ from database import get_connection
 from entities import Expense
 
 
-
 class ExpenseService:
     """Class that handles all expense related operations,
     such as adding, deleting and editing expenses,
@@ -15,15 +14,19 @@ class ExpenseService:
         conn = get_connection()
         cursor = conn.cursor()
 
-        cursor.execute("""
+        cursor.execute(
+            """
             INSERT INTO expenses (user_id, name, price, category, recurring, last_applied)
             VALUES (?, ?, ?, ?, ?, ?)""",
-            (user["id"],
-            expense.name,
-            expense.price,
-            expense.category,
-            int(expense.recurring),
-            datetime.now().isoformat()))
+            (
+                user["id"],
+                expense.name,
+                expense.price,
+                expense.category,
+                int(expense.recurring),
+                datetime.now().isoformat(),
+            ),
+        )
 
         conn.commit()
         conn.close()
@@ -54,15 +57,19 @@ class ExpenseService:
         conn = get_connection()
         cursor = conn.cursor()
 
-        cursor.execute("""
+        cursor.execute(
+            """
         UPDATE expenses
         SET name=?, price=?, category=?, recurring=?
         WHERE expense_id=?""",
-        (new_expense.name,
-        new_expense.price,
-        new_expense.category,
-        int(new_expense.recurring),
-        expense.id))
+            (
+                new_expense.name,
+                new_expense.price,
+                new_expense.category,
+                int(new_expense.recurring),
+                expense.id,
+            ),
+        )
 
         conn.commit()
         conn.close()
@@ -73,8 +80,11 @@ class ExpenseService:
         conn = get_connection()
         cursor = conn.cursor()
 
-        cursor.execute("""
-            UPDATE users SET budget=? WHERE id=?""", (amount, user["id"]))
+        cursor.execute(
+            """
+            UPDATE users SET budget=? WHERE id=?""",
+            (amount, user["id"]),
+        )
         conn.commit()
         conn.close()
 
@@ -83,8 +93,16 @@ class ExpenseService:
         conn = get_connection()
         cursor = conn.cursor()
 
-        cursor.execute("""
-            SELECT SUM(price) FROM expenses WHERE user_id=?""", (user["id"],))
+        current_month = datetime.now().strftime("%Y-%m")
+
+        cursor.execute(
+            """
+        SELECT SUM(price)
+        FROM expenses
+        WHERE user_id=?
+        AND strftime('%Y-%m', created_at)=?""",
+            (user["id"], current_month),
+        )
 
         total = cursor.fetchone()[0]
         conn.close()
@@ -107,10 +125,13 @@ class ExpenseService:
         conn = get_connection()
         cursor = conn.cursor()
 
-        cursor.execute("""
-            SELECT expense_id, name, price, category, recurring, last_applied
+        cursor.execute(
+            """
+            SELECT expense_id, name, price, category, recurring, last_applied, created_at
             FROM expenses
-            WHERE user_id = ?""", (user["id"],))
+            WHERE user_id = ?""",
+            (user["id"],),
+        )
 
         rows = cursor.fetchall()
         conn.close()
@@ -122,7 +143,11 @@ class ExpenseService:
                 price=row[2],
                 category=row[3],
                 recurring=bool(row[4]),
-                last_applied = datetime.fromisoformat(row[5]) if row[5] else None) for row in rows]
+                last_applied=datetime.fromisoformat(row[5]) if row[5] else None,
+                created_at=datetime.fromisoformat(row[6]) if row[6] else None,
+            )
+            for row in rows
+        ]
 
     def track_recurring_expenses(self, user):
         """Checks for recurring expenses that need to be applied and applies them."""
@@ -135,9 +160,16 @@ class ExpenseService:
             months_passed = days_passed // 30
             if months_passed >= 1:
                 for _ in range(months_passed):
-                    self.add_expense(user,
-                    Expense(expense_id=None, name=expense.name,
-                    price=expense.price, category=expense.category, recurring=False))
+                    self.add_expense(
+                        user,
+                        Expense(
+                            expense_id=None,
+                            name=expense.name,
+                            price=expense.price,
+                            category=expense.category,
+                            recurring=False,
+                        ),
+                    )
 
                 self._update_last_applied(expense, now)
 
@@ -147,12 +179,13 @@ class ExpenseService:
         conn = get_connection()
         cursor = conn.cursor()
 
-        cursor.execute("""
+        cursor.execute(
+            """
             UPDATE expenses
             SET last_applied=?
             WHERE expense_id=?""",
-            (new_date.isoformat(),
-            expense.id))
+            (new_date.isoformat(), expense.id),
+        )
 
         conn.commit()
         conn.close()

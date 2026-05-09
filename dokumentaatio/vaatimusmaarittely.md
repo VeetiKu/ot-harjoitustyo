@@ -27,8 +27,6 @@ When the application is opened, the user is presented with the login view. From 
 - The user can log into the system  
 - If: The user does not exist, or The password is incorrect The Login will provide an error
 
-COMPLETED
-
 ---
 
 ### After Login
@@ -43,8 +41,6 @@ COMPLETED
 - The user can set a monthly budget  
 - The user can update the budget at any time  
 
-COMPLETED
-
 ### Add Expenses
 - The user can add a new expense  
 - Each expense includes:
@@ -52,40 +48,31 @@ COMPLETED
   - Price  
   - Category  
   - Date 
-- Expenses are visible only to the user who created them  
-
-COMPLETED
 
 ### Recurring Expenses
 - The user can define recurring monthly expenses  
 - Recurring expenses are automatically added each month 
-
-COMPLETED
 
 ### Edit Expenses
 - The user can edit:
   - One-time expenses  
   - Recurring expenses  
 
-COMPLETED
-
 ### Delete Expenses
 - The user can delete an expense from the current month  
-- The user can stop a recurring expense from future months  
-
-COMPLETED
-
+- The user can stop a recurring expense from future months
+  
 ### Monthly Reset
 - At the start of a new month:
-  - Previous month’s expenses are archived  
-  - A new empty expense list is created  
-  - Recurring expenses are automatically applied  
+  - Previous months expenses are archived  
+  - A new empty expense list is created for the month  
+  - Recurring expenses are automatically applied to the new month 
 
 ### Expense Overview
 - The user can view:
-  - Total spending for the current month  
-  - Spending breakdown by category
-  - Past months expenses
+  - Total spending for the current month
+  - Budget Left for the current month 
+  - All Past expenses
 
 ---
 

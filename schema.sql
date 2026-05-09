@@ -13,5 +13,6 @@ CREATE TABLE IF NOT EXISTS expenses (
     category TEXT,
     recurring INTEGER DEFAULT 0,
     last_applied TEXT,
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY(user_id) REFERENCES users(id)
 );

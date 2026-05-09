@@ -1,4 +1,4 @@
-# kulujenhallintasovellus
+# Kulujenhallintasovellus
 
 Sovellus on kulujenhallintasovellus, jonka avulla käyttäjä voi lisätä, muokata ja poistaa kulujaan sekä asettaa ja seurata budjettiaan. Sovellus auttaa käyttäjää hahmottamaan omaa rahankäyttöään ja pitämään menot hallinnassa.
 
@@ -59,7 +59,7 @@ Changelog löytyy [täältä](./dokumentaatio/changelog.md)
 
 Arkkitehtuuri löytyy [täältä](./dokumentaatio/arkkitehtuuri.md)
 
-## Julakisut
+## Julkaisut
 
 Sovelluksen julkaisut löytyy [täältä](https://github.com/VeetiKu/ot-harjoitustyo/releases)
 

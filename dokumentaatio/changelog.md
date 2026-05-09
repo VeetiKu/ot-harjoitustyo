@@ -28,3 +28,9 @@
 - Rebuilt automated tests to work with the database  
 - Improved code quality by fixing pylint warnings and errors  
 - Added usage instructions and a preliminary architecture description to the documentation  
+
+## Week 6
+- Updated the CLI interface to Graphical using tkinter
+- Past months expenses are now archivied at the start of a new month
+- Updated all project documentation to be up to date
+- Improved code quality by fixing pylint warnings and errors 
