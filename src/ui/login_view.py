@@ -4,6 +4,7 @@ from tkinter import ttk, messagebox
 from services.authentication import Authentication
 from ui.dashboard import DashboardView
 
+# This file contains mostly AI generated code that has been edited by the developer.
 
 class LoginView:
     """Class that represents the login and registration view of the application.

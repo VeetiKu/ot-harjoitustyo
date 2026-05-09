@@ -4,8 +4,12 @@ from datetime import datetime
 from services.expenseservice import ExpenseService
 from entities import Expense
 
+# This file contains mostly AI generated code that has been edited by the developer.
 
 class DashboardView:
+    """ class that represents the main dashboard view of the application.
+    It displays the users expenses in a table, and provides buttons to add, edit and delete expenses as well as set a budget and logout."""
+    
     def __init__(self, root, user):
         self.root = root
         self.user = user
